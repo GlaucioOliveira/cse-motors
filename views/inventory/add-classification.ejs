@@ -1,0 +1,31 @@
+<div class="form-body">
+  <div class="form-container">
+  <% if (title) { %>
+      <h1><%= title %></h1>
+      <% } else {
+        res.redirect('/')
+      } %>
+  <form id="loginForm" action="/inv/add-classification" method="post">
+      <div style="text-align:left"> 
+          <label for="classificationName">Classification Name:</label>
+          <input type="text" id="classificationName" name="classification_name" value="<%= locals.classification_name %>" pattern="[A-Za-z]+" required>
+        <div>
+          <span><strong class="required-field">*</strong> NAME MUST BE ALPHABETIC CHARACTERS ONLY.</span><br>
+          <span><strong class="required-field">*</strong> FIELD IS REQUIRED.</span>
+        </div>
+      </div>
+      <br>
+      <button type="submit">Add Classification</button>
+  </form>
+  
+  <%- messages() %>
+
+  <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+</div>
+</div>

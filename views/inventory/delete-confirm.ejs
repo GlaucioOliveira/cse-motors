@@ -1,0 +1,48 @@
+<div class="form-body">
+  <div class="form-container">
+  <% if (title) { %>
+      <h1><%= title %></h1>
+      <% } else {
+        res.redirect('/')
+      } %>
+  <form id="deleteForm" action="/inv/delete" method="post">      
+    <p>Confirm Deletion - The delete is permanent.</p>
+    <div style="text-align:left">
+      <div> 
+          <label for="makeName">Make:</label>
+          <input readonly type="text" id="makeName" name="inv_make" placeholder="Min of 3 characters" minlength="3" value="<%= locals.inv_make %>">
+      </div>
+      <div> 
+          <label for="modelName">Model:</label>
+          <input readonly type="text" id="modelName" name="inv_model" placeholder="Min of 3 characters" minlength="3" value="<%= locals.inv_model %>">
+      </div>
+      <div> 
+        <label for="price">Price:</label>
+        <input readonly type="number" id="price" name="inv_price" placeholder="decimal or integer" value="<%= locals.inv_price %>">
+      </div>
+      <div> 
+        <label for="year">Year:</label>
+        <input readonly type="number" id="year" name="inv_year" placeholder="4-digit year" value="<%= locals.inv_year %>">
+      </div>
+    </div>
+
+      <br>
+      <button type="submit">Delete Vehicle</button>
+
+      <input type="hidden" name="inv_id"
+      <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+      <% } %>>
+
+  </form>
+  
+  <%- messages() %>
+
+  <% if (errors) { %>
+      <ul class="notice">
+     <% errors.array().forEach(error => { %>
+       <li><%= error.msg %></li>
+    <%  }) %>
+     </ul>
+    <% } %>
+</div>
+</div>

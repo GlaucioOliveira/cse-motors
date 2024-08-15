@@ -1,0 +1,30 @@
+
+<div class="login-body">
+    <div class="login-container">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+        <% } else {
+          res.redirect('/')
+        } %>
+    <form id="loginForm" action="/account/login" method="post">
+        <div style="text-align:left"> 
+            <label for="accountEmail">Email:</label>
+            <input type="email" name="account_email" id="accountEmail" value="<%= locals.account_email %>" placeholder="Your email here" required>
+
+            <label for="accountPassword">Password:</label>
+            <input type="password" name="account_password" id="accountPassword" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
+        </div>
+        <button type="submit">Login</button>
+    </form>
+    <p>No Account? <a href="/account/register" class="signup-link">Sign Up</a></p>
+    <%- messages() %>
+
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+</div>
+</div>

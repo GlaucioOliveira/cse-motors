@@ -1,0 +1,60 @@
+
+<div class="form-body">
+    <div class="form-container">
+    <% if (title) { %>
+        <h1><%= title %></h1>
+        <% } else {
+          res.redirect('/')
+        } %>
+    <form action="/account/edit" method="post">
+        <div style="text-align:left">        
+            <label for="accountFirstName">First Name:</label>
+            <input type="text" id="accountFirstName" value="<%= locals.account_firstname %>" name="account_firstname" placeholder="Your first name" required>
+
+            <label for="accountLastName">Last Name:</label>
+            <input type="text" id="accountLastName" value="<%= locals.account_lastname %>" name="account_lastname" placeholder="Your last name" required>
+
+            <label for="accountEmail">Email:</label>
+            <input type="email" id="accountEmail" value="<%= locals.account_email %>" name="account_email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" placeholder="Enter a valid email address" required>        
+        </div>
+        <br>
+        <button type="submit">Update</button>
+
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+
+    </form>
+<br>
+    <form action="/account/edit-password" method="post">
+        <br>
+        <h2>Update Password</h2>
+        <p style="text-align: left;">Passwords must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character</p>
+        <p  style="text-align: left;"><strong>Note: Your original password will be changed.</strong></p>
+        <br>
+        <div style="text-align:left">        
+            <label for="accountPassword">Password:</label>
+            <input type="password" id="accountPassword" name="account_password" placeholder="Password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" required>
+            <span style="font-size: smaller; font-style: italic;">
+                There must be at least 12 characters, one must be a number, one must be a lowercase letter, one must be a capital letter, and one must be a non-alphanumeric character
+            </span>            
+        </div>
+        <br>
+        <button type="submit">Change Password</button>
+
+        <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+
+    </form>    
+
+    <%- messages() %>
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+</div>
+</div>

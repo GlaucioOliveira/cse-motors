@@ -1,0 +1,23 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+<%- messages() %>
+
+<h2>Welcome <%= locals.accountData.account_firstname %></h2>
+
+<div>You're logged in.</div> <br>
+
+<a title="Edit Account" href="/account/edit/<%=locals.accountData.account_id%>">Edit Account Information</a>
+
+<%- reviewsView %>
+
+<% if(locals.loggedin && (locals.accountData.account_type == "Employee" || locals.accountData.account_type == "Admin")) {%>
+  <h3>Inventory Management</h3> <br>
+  <a title="Manage Inventory" href="/inv/">Manage Inventory</a>
+  <% } %>
+
+<br>
+<br>

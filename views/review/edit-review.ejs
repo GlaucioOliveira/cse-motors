@@ -1,0 +1,38 @@
+<div class="form-body">
+    <div class="form-container">
+        <% if (title) { %>
+            <h1><%= title %></h1>
+            <% } else {
+              res.redirect('/')
+            } %>
+    <form id="loginForm" action="/inv/edit-review" method="post">
+        <div style="text-align:left"> 
+            <label for="reviewDate">Review Date:</label>
+            <input type="text" id="reviewDate" name="review_date" disabled value="<%= locals.review_date %>">
+        </div>
+        <div style="text-align:left"> 
+          <label for="review">Review:</label>
+          <textarea name="review_text" id="review" cols="30" rows="10" minlength="10" required><%= locals.review_text %></textarea>
+        </div>
+        <div style="text-align:left">
+            <span><strong class="required-field">*</strong> FIELD IS REQUIRED.</span>
+        </div>
+        <br>
+        <button type="submit">Update</button>
+
+        <input type="hidden" name="review_id"
+        <% if(locals.review_id) { %> value="<%= locals.review_id %>"
+        <% } %>>
+    </form>
+    
+    <%- messages() %>
+  
+    <% if (errors) { %>
+        <ul class="notice">
+       <% errors.array().forEach(error => { %>
+         <li><%= error.msg %></li>
+      <%  }) %>
+       </ul>
+      <% } %>
+  </div>
+  </div>

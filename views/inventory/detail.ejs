@@ -1,0 +1,54 @@
+<% if (title) { %>
+    <h1><%= title %></h1>
+    <% } else {
+      res.redirect('/')
+    } %>
+
+
+    <%# messages() %>
+
+    <%- detail %>
+
+    <%- reviewList %>
+
+    <% if(locals.loggedin) {%>
+      <div class="form-body">
+        <div class="form-container">
+          <h2>
+            Add Your Own Review
+          </h2>
+        <form id="loginForm" action="/inv/add-review" method="post">
+            <div style="text-align:left"> 
+                <label for="screenName">Screen Name:</label>
+                <input type="text" id="screenName" name="screen_name" value="<%= locals.screen_name %>" required>
+            </div>
+            <div style="text-align:left"> 
+              <label for="review">Review:</label>
+              <textarea name="review_text" id="review" cols="30" rows="10" minlength="10" required><%= locals.review_text %></textarea>
+            </div>
+            <br>
+            <button type="submit">Submit Review</button>
+
+            <input type="hidden" name="inv_id"
+            <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+            <% } %>>
+        </form>
+        
+        <%- messages() %>
+      
+        <% if (errors) { %>
+            <ul class="notice">
+           <% errors.array().forEach(error => { %>
+             <li><%= error.msg %></li>
+          <%  }) %>
+           </ul>
+          <% } %>
+      </div>
+      </div>
+
+      
+      <% } 
+      else { %>
+        <br>
+      <p>You must <a title="Click to log in" href="/account/login">login</a> to write a review.</p>
+      <% } %>
