@@ -14,10 +14,10 @@ services:
     environment:
       NODE_ENV: production
       HOST: ${HOST} 
-      USER: ${USER}
-      PASS: ${PASS}
-      DATABASE: ${DATABASE}
-      API_BASE: ${API_BASE}    
-      PORT: ${PORT}  
+      DATABASE_URL: ${DATABASE_URL}
+      SESSION_SECRET: ${SESSION_SECRET}    
+      ACCESS_TOKEN_SECRET: ${ACCESS_TOKEN_SECRET}    
+      PORT: ${PORT} 
+
     ports:
       - 3002:3002
